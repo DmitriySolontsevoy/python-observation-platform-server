@@ -1,5 +1,5 @@
 from flask import request
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from uuid import uuid1
 
 
@@ -14,21 +14,24 @@ class LoginController(Resource):
 
     # Rotate vertically
     def post(self):
-        if request.form['username'] == Constants.REGULAR_USER_USERNAME \
-                & request.form['password'] == Constants.REGULAR_USER_PASSWORD:
+        parser = reqparse.RequestParser()
+        parser.add_argument('username')
+        parser.add_argument('password')
+        args = parser.parse_args()
 
-            token = uuid1()
+        if args['username'] == Constants.REGULAR_USER_USERNAME and args['password'] == Constants.REGULAR_USER_PASSWORD:
+
+            token = uuid1().__str__()
 
             self.session_manager.add_session(token, False)
 
             return {"token": token}, 200
-        elif request.form['username'] == Constants.ADMIN_USER_USERNAME \
-                & request.form['password'] == Constants.ADMIN_USER_PASSWORD:
+        elif args['username'] == Constants.ADMIN_USER_USERNAME and args['password'] == Constants.ADMIN_USER_PASSWORD:
 
-            token = uuid1()
+            token = uuid1().__str__()
 
             self.session_manager.add_session(token, True)
 
-            return {"token": uuid1()}, 200
+            return {"token": token}, 200
         else:
             return {"error": "wrongCredentials"}, 401
