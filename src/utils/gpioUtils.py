@@ -5,6 +5,7 @@ led = LED(17)
 
 
 class GPIOUtils:
+
     @staticmethod
     def updateLED(state):
         if state is 0:

@@ -6,12 +6,11 @@ from src.config.constants import Constants
 
 
 class LoginController(Resource):
-    session_manager = {}
 
     def __init__(self, session_manager):
         self.session_manager = session_manager
 
-    # Rotate vertically
+    # Login
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('username')
