@@ -130,3 +130,6 @@ dmypy.json
 
 # Init.py
 **/__init__.py
+
+# Pycharm cache
+.idea/
