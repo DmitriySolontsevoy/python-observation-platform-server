@@ -18,16 +18,12 @@ class LoginController(Resource):
         args = parser.parse_args()
 
         if args['username'] == Constants.REGULAR_USER_USERNAME and args['password'] == Constants.REGULAR_USER_PASSWORD:
-
             token = uuid1().__str__()
-
             self.session_manager.add_session(token, False)
 
             return {"token": token}, 200
         elif args['username'] == Constants.ADMIN_USER_USERNAME and args['password'] == Constants.ADMIN_USER_PASSWORD:
-
             token = uuid1().__str__()
-
             self.session_manager.add_session(token, True)
 
             return {"token": token}, 200

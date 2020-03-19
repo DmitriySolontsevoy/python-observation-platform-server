@@ -3,25 +3,28 @@ from src.dto.session import Session
 
 class SessionManager:
 
-    sessions = []
+    __sessions = []
 
     def add_session(self, token, is_admin):
-        self.sessions.append(Session(token, is_admin))
+        self.__sessions.append(Session(token, is_admin))
 
     def check_session(self, request, is_admin):
         header = request.headers.get("Authorization")
 
-        for session in self.sessions:
+        for session in self.__sessions:
             if session.token == header:
                 if session.is_admin == is_admin:
                     return True, True
                 else:
                     return True, False
 
-        return False, False
+        if is_admin is True:
+            return False, False
+        else:
+            return False
 
     def check_auth_regular_user(self, request):
-        if self.check_session(request, True):
+        if self.check_session(request, False):
             return None, None
         else:
             return {"success": "false", "reason": "Unauthorized"}, 401

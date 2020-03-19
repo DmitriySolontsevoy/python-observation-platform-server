@@ -1,5 +1,9 @@
 from gpiozero import LED
 from time import sleep
+import RPi.GPIO as GPIO
+
+from src.utils.converters import Converters
+
 
 led = LED(17)
 
@@ -20,3 +24,8 @@ class GPIOUtils:
             sleep(period_duration / 2)
             led.off()
             sleep(period_duration / 2)
+
+    @staticmethod
+    def rotate_servo(angle):
+        modulation_width = Converters.to_modulation_width(angle)
+        print(modulation_width)

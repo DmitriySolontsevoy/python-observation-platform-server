@@ -8,7 +8,7 @@ class CameraStreamController(Resource):
         self.session_manager = session_manager
 
     # Stream camera feed
-    def put(self):
+    def get(self):
         error, code = self.session_manager.check_auth_regular_user(request)
 
         if error is None:
