@@ -6,6 +6,11 @@ from src.utils.converters import Converters
 
 
 led = LED(17)
+servo_horizontal_pin = 18
+servo_vertical_pin = 12
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(servo_horizontal_pin, GPIO.OUT)
+GPIO.setup(servo_vertical_pin, GPIO.OUT)
 
 
 class GPIOUtils:
@@ -26,6 +31,14 @@ class GPIOUtils:
             sleep(period_duration / 2)
 
     @staticmethod
-    def rotate_servo(angle):
+    def rotate_servo(angle, servo):
         modulation_width = Converters.to_modulation_width(angle)
-        print(modulation_width)
+
+        if servo == 0:
+            servo_chosen = GPIO.PWM(servo_horizontal_pin, 50)
+        else:
+            servo_chosen = GPIO.PWM(servo_vertical_pin, 50)
+
+        servo_chosen.start(modulation_width)
+        sleep(1)
+        servo_chosen.stop()

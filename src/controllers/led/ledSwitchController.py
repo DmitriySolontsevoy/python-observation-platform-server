@@ -25,9 +25,9 @@ class LEDSwitchController(Resource):
                 elif self.led_state_keeper.get_state() == Constants.LED_BLINKING:
                     data, response_code = {"success": "false", "reason": "LED used by api/tickLED"}, 400
                 else:
+                    self.led_state_keeper.set_state(state)
                     GPIOUtils.updateLED(state)
                     data, response_code = {"success": "true", "LEDState": state}, 200
-                    self.led_state_keeper.set_state(state)
                 return data, response_code
             else:
                 return error, code

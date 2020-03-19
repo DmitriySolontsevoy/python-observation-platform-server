@@ -1,13 +1,14 @@
 from flask_restful import Resource
 from flask import request
 
+from src.statekeepers.servoAngleStateKeeper import ServoAngleStateKeeper
 from src.utils.gpioUtils import GPIOUtils
 from src.utils.validationHelper import ValidationHelper
 
 
 class VerticalRotationController(Resource):
 
-    servo_state_angle = None
+    servo_state_angle = ServoAngleStateKeeper()
 
     def __init__(self, session_manager):
         self.session_manager = session_manager
@@ -20,10 +21,11 @@ class VerticalRotationController(Resource):
             error, code = ValidationHelper.validate_vertical_servo_angle(angle)
 
             if error is None:
-                if angle == self.servo_state_angle:
+                if angle == self.servo_state_angle.get_angle():
                     response_code = 304
                 else:
-                    GPIOUtils.rotate_servo(angle)
+                    self.state_servo_angle.set_angle(angle)
+                    GPIOUtils.rotate_servo(angle, 1)
                     response_code = 200
                 return {"success": "true", "rotationPlain": "vertical", "angle": angle}, response_code
             else:
