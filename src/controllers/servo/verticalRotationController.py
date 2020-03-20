@@ -8,7 +8,7 @@ from src.utils.validationHelper import ValidationHelper
 
 class VerticalRotationController(Resource):
 
-    servo_state_angle = ServoAngleStateKeeper()
+    state_servo_angle = ServoAngleStateKeeper()
 
     def __init__(self, session_manager):
         self.session_manager = session_manager
@@ -21,7 +21,7 @@ class VerticalRotationController(Resource):
             error, code = ValidationHelper.validate_vertical_servo_angle(angle)
 
             if error is None:
-                if angle == self.servo_state_angle.get_angle():
+                if angle == self.state_servo_angle.get_angle():
                     response_code = 304
                 else:
                     self.state_servo_angle.set_angle(angle)
