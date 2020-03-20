@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
 
 from src.controllers.camera.cameraStreamController import CameraStreamController
 from src.controllers.servo.horizontalRotationController import HorizontalRotationController
@@ -13,6 +14,7 @@ from src.session.sessionManager import SessionManager
 
 class Server:
     server = Flask(__name__)
+    CORS(server)
     handlers = Api(server)
 
     def __init__(self):

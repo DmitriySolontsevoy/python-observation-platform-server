@@ -21,11 +21,11 @@ class LoginController(Resource):
             token = uuid1().__str__()
             self.session_manager.add_session(token, False)
 
-            return {"token": token}, 200
+            return {"token": token, "role": "user"}, 200
         elif args['username'] == Constants.ADMIN_USER_USERNAME and args['password'] == Constants.ADMIN_USER_PASSWORD:
             token = uuid1().__str__()
             self.session_manager.add_session(token, True)
 
-            return {"token": token}, 200
+            return {"token": token, "role": "admin"}, 200
         else:
             return {"error": "wrongCredentials"}, 401
