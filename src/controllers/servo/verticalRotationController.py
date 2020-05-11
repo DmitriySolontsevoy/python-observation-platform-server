@@ -1,9 +1,9 @@
 from flask_restful import Resource
 from flask import request
 
-from src.statekeepers.servoAngleStateKeeper import ServoAngleStateKeeper
-from src.utils.gpioUtils import GPIOUtils
-from src.utils.validationHelper import ValidationHelper
+from statekeepers.servoAngleStateKeeper import ServoAngleStateKeeper
+from utils.gpioUtils import GPIOUtils
+from utils.validationHelper import ValidationHelper
 
 
 class VerticalRotationController(Resource):

@@ -2,7 +2,7 @@ from uuid import uuid1
 
 from flask_restful import Resource, reqparse
 
-from src.config.constants import Constants
+from config.constants import Constants
 
 
 class LoginController(Resource):

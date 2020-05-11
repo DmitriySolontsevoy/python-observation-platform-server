@@ -1,9 +1,9 @@
 from flask_restful import Resource
 from flask import request
 
-from src.config.constants import Constants
-from src.utils.gpioUtils import GPIOUtils
-from src.utils.validationHelper import ValidationHelper
+from config.constants import Constants
+from utils.gpioUtils import GPIOUtils
+from utils.validationHelper import ValidationHelper
 
 
 class LEDSwitchController(Resource):

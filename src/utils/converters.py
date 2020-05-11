@@ -1,4 +1,4 @@
-from src.config.constants import Constants
+from config.constants import Constants
 
 
 class Converters:

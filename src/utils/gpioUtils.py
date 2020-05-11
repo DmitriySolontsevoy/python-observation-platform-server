@@ -2,7 +2,7 @@ from gpiozero import LED
 from time import sleep
 import RPi.GPIO as GPIO
 
-from src.utils.converters import Converters
+from utils.converters import Converters
 
 
 led = LED(17)

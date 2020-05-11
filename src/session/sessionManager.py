@@ -1,4 +1,4 @@
-from src.dto.session import Session
+from dto.session import Session
 
 
 class SessionManager:
@@ -7,6 +7,11 @@ class SessionManager:
 
     def add_session(self, token, is_admin):
         self.__sessions.append(Session(token, is_admin))
+
+    def remove_session(self, token):
+        for session in self.__sessions:
+            if session.token == token:
+                self.__sessions.remove(session)
 
     def check_session(self, request, is_admin):
         header = request.headers.get("Authorization")
