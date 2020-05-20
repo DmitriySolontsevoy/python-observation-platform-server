@@ -1,7 +1,5 @@
 from uuid import uuid1
-
 from flask_restful import Resource, reqparse
-
 from config.constants import Constants
 
 
